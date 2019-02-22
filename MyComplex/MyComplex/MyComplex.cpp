@@ -11,7 +11,7 @@ MyComplex::MyComplex(const double& InitRe,const double& InitIm) {
 	Im = InitIm;
 }
 MyComplex::~MyComplex() {
-	cout << "Destructor"<<endl;
+	//cout << "Destructor"<<endl;
 }
 double MyComplex::GetRe() {
 	return Re;
@@ -97,10 +97,8 @@ MyComplex operator/(const MyComplex& a, const MyComplex& b) {
 		c.Im = b.Re*a.Im-a.Re*b.Im;
 		return c;
 	}
-	else {
-		cout << "Попытка деления на ноль";
-		return a;
-	}
+	else 
+		throw "Попытка деления на ноль";
 }
 MyComplex operator/(const MyComplex& a, const double& b) {
 	if (b != 0) {
@@ -108,7 +106,7 @@ MyComplex operator/(const MyComplex& a, const double& b) {
 		return (a*d);
 	}
 	else {
-		cout << "Попытка деления на ноль";
+		throw "Попытка деления на ноль";
 		return a;
 	}
 }

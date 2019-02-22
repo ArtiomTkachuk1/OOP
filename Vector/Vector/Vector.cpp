@@ -1,7 +1,5 @@
 ﻿#include "pch.h"
 #include"Vector.h"
-#include <iostream>
-using namespace std;
 template <class T>
 Vector<T>::Vector() {
 	cnt = 6;
@@ -41,6 +39,7 @@ Vector<T>::Vector(const Vector& a) {
 template <class T>
 Vector<T>::~Vector() {
 	delete[] ptr;
+	cnt = 0;
 }
 template <class T>
 int Vector<T>::Getcnt() {

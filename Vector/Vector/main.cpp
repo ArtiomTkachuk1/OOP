@@ -14,10 +14,10 @@ int main() {
 	for (int i = 0; i < n; i++)
 		tmp[i] = 2 * i + 1;
 	B.Setptr(tmp);
-	cout << B.GetElement(0);
+	cout <<"B[0]="<< B.GetElement(0)<<endl;
 	A = A + B;
-	cout << "A:" << A;
-	cout << "B:" << B;
+	cout << "A:" << A<<endl;
+	cout << "B:" << B<<endl;
 	Vector<double> C = B;
 	try {
 		Vector<double> D(-4);
@@ -50,5 +50,6 @@ int main() {
 	cout << "Z:" << Z << endl;
 	cout << "Z/2:" << Z/2 << endl;
 	cin >> Z;
+	cout << "Z:" << Z << endl;
 	return 0;
 }
