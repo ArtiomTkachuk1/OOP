@@ -18,7 +18,7 @@ int main() {
 	A = A + B;
 	cout << "A:" << A<<endl;
 	cout << "B:" << B<<endl;
-	Vector<double> C = B;
+	Vector<double> C=B;
 	try {
 		Vector<double> D(-4);
 	}
@@ -51,5 +51,7 @@ int main() {
 	cout << "Z/2:" << Z/2 << endl;
 	cin >> Z;
 	cout << "Z:" << Z << endl;
+	delete[] tmp;
+	delete[] tmpint;
 	return 0;
 }

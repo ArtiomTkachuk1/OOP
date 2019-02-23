@@ -2,37 +2,37 @@
 #include"Vector.h"
 template <class T>
 Vector<T>::Vector() {
-	cnt = 6;
-	ptr = new T[cnt];
+	ptr = new T[6];
 	if (ptr == NULL)
 		throw ("Не удалось выделить память");
+	cnt = 6;
 }
 template <class T>
 Vector<T>::Vector(const int& CountElement) {
 	if (CountElement <= 0)
 		throw ("Количество элементов должно быть больше нуля");
-	cnt = CountElement;
 	ptr = new T[CountElement];
 	if (ptr == NULL) 
 		throw ("Не удалось выделить память");
+	cnt = CountElement;
 }
 template <class T>
 Vector<T>::Vector(const int& CountElement, T* newptr) {
 	if (CountElement <= 0)
 		throw ("Количество элементов должно быть больше нуля");
-	cnt = CountElement;
 	ptr = new T[CountElement];
 	if (ptr == NULL) 
 		throw ("Не удалось выделить память");
+	cnt = CountElement;
 	for (int i = 0; i < cnt; i++)
 		ptr[i] = newptr[i];
 }
 template <class T>
 Vector<T>::Vector(const Vector& a) {
-	cnt = a.cnt;
-	ptr = new T[cnt];
+	ptr = new T[a.cnt];
 	if (ptr == NULL) 
 		throw ("Не удалось выделить память");
+	cnt = a.cnt;
 	for (int i = 0; i < cnt; i++)
 		ptr[i] = a.ptr[i];
 }
@@ -48,15 +48,30 @@ int Vector<T>::Getcnt() {
 template <class T>
 bool Vector<T>::Setcnt(const int& newcnt) {
 	if (newcnt <= 0) {
-		cout << "Некорректный индекс"<<endl;
+		cout << "Некорректное количество элементов"<<endl;
 		return false;
 	}
+	T* tmp=new T[newcnt];
+	if (ptr == NULL) 
+		throw ("Не удалось выделить память");
+	int n=newcnt;
+	if(cnt<newcnt)
+		n=cnt;
+	for(int i=0;i<n;i++)
+		tmp[i]=ptr[i];
+	delete[] ptr;
+	ptr = tmp;
 	cnt = newcnt;
 	return true;
 }
 template <class T>
 T* Vector<T>::Getptr() {
-	return ptr;
+	T* ans=new T[cnt];
+	if(ans==NULL)
+		throw ("Не удалось выделить память");
+	for(int i=0;i<cnt;i++)
+		ans[i]=ptr[i];
+	return ans;
 }
 template <class T>
 bool Vector<T>::Setptr(T* newptr) {
@@ -72,6 +87,11 @@ T Vector<T>::GetElement(const int& num) {
 }
 template <class T>
 Vector<T> Vector<T>::operator=(const Vector<T>& a) {
+	delete[] ptr;
+	cnt=0;
+	ptr=new T[a.cnt];
+	if (ptr == NULL) 
+		throw ("Не удалось выделить память");
 	cnt = a.cnt;
 	for (int i = 0; i < cnt; i++)
 		ptr[i] = a.ptr[i];
@@ -126,6 +146,8 @@ bool Vector<T>::delElement(const int& indexElement) {
 	cnt--;
 	return true;
 }
+template class Vector<double>;
+template class Vector<int>;
 /*template <class T>
 Vector<T> operator+(const Vector<T>& a, const Vector<T>&b) {
 	if (a.cnt != b.cnt)
@@ -245,5 +267,3 @@ istream&operator>>(istream& o, Vector<T>& a) {
 	}
 	return o;
 }*/
-template class Vector<double>;
-template class Vector<int>;

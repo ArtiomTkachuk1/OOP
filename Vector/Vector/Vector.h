@@ -35,89 +35,68 @@ class Vector{
 		friend Vector<T> operator*(const T&, const Vector<T>&);
 		friend Vector<T> operator/(const Vector<T>&, const Vector<T>&);
 		friend Vector<T> operator/(const Vector<T>&, const T&);
-		friend ostream&operator<<(ostream&, const Vector<T>&);*/
-		friend Vector<T> operator+(const Vector<T>& a, const Vector<T>&b) {
-			if (a.cnt != b.cnt)
+		friend ostream&operator<<(ostream&, const Vector<T>&);
+		friend istream&operator>>(istream&, const Vector<T>&);*/
+		friend Vector<T> operator+(const Vector<T>& A, const Vector<T>&B) {
+			if (A.cnt != B.cnt)
 				throw("Операция невозможна");
-			Vector c(a.cnt);
-			for (int i = 0; i < c.cnt; i++)
-				c.ptr[i] = a.ptr[i] + b.ptr[i];
-			return c;
+			Vector C(A.cnt);
+			for (int i = 0; i < C.cnt; i++)
+				C.ptr[i] = A.ptr[i] + B.ptr[i];
+			return C;
 		};
-		friend Vector<T> operator+(const Vector<T>& a, const T& b) {
-			Vector<T> c;
-			c.cnt = a.cnt;
-			c.ptr = new T[c.cnt];
-			if (c.ptr == NULL) throw ("Не удалось выделить память");
-			for (int i = 0; i < a.cnt; i++)
-				c.ptr[i] = a.ptr[i] + b;
-			return c;
+		friend Vector<T> operator+(const Vector<T>& A, const T& b) {
+			Vector<T> C(A.cnt);
+			for (int i = 0; i < A.cnt; i++)
+				C.ptr[i] = A.ptr[i] + b;
+			return C;
 		};
-		friend Vector<T> operator+(const T& b, const Vector<T>& a) {
-			return(a + b);
+		friend Vector<T> operator+(const T& a, const Vector<T>& B) {
+			return(B + a);
 		}
-		friend Vector<T> operator-(const Vector<T>& a, const Vector<T>& b) {
-			if (a.cnt != b.cnt)
+		friend Vector<T> operator-(const Vector<T>& A, const Vector<T>& B) {
+			return (A+((-1)*B));
+		};
+		friend Vector<T> operator-(const Vector<T>& A, const T& b) {
+			return (A+(-1)*b);
+		};
+		friend Vector<T> operator-(const T& a, const Vector<T>& B) {
+			return(a +((-1)*B));
+		};
+		friend Vector<T> operator*(const Vector<T>& A, const Vector<T>& B) {
+			if (A.cnt != B.cnt)
 				throw("Операция невозможна");
-			Vector<T> c(a.cnt);
-			for (int i = 0; i < c.cnt; i++)
-				c.ptr[i] = a.ptr[i] - b.ptr[i];
-			return c;
+			Vector<T> C(A.cnt);
+			for (int i = 0; i < C.cnt; i++)
+				C.ptr[i] = A.ptr[i] * B.ptr[i];
+			return C;
 		};
-		friend Vector<T> operator-(const Vector<T>& a, const T& b) {
-			Vector<T> c;
-			c.cnt = a.cnt;
-			c.ptr = new T[c.cnt];
-			if (c.ptr == NULL) throw ("Не удалось выделить память");
-			for (int i = 0; i < a.cnt; i++)
-				c.ptr[i] = a.ptr[i] - b;
-			return c;
+		friend Vector<T> operator*(const Vector<T>& A, const T& b) {
+			Vector<T> C(A.cnt);
+			for (int i = 0; i < A.cnt; i++)
+				C.ptr[i] = A.ptr[i] * b;
+			return C;
 		};
-		friend Vector<T> operator-(const T& b, const Vector<T>& a) {
-			return((-1)*(a - b));
+		friend Vector<T> operator*(const T& a, const Vector<T>& B) {
+			return(B*a);
 		};
-		friend Vector<T> operator*(const Vector<T>& a, const Vector<T>& b) {
-			if (a.cnt != b.cnt)
+		friend Vector<T> operator/(const Vector<T>& A, const Vector<T>& B) {
+			if (A.cnt != B.cnt)
 				throw("Операция невозможна");
-			Vector<T> c(a.cnt);
-			for (int i = 0; i < c.cnt; i++)
-				c.ptr[i] = a.ptr[i] * b.ptr[i];
-			return c;
-		};
-		friend Vector<T> operator*(const Vector<T>& a, const T& b) {
-			Vector<T> c;
-			c.cnt = a.cnt;
-			c.ptr = new T[c.cnt];
-			if (c.ptr == NULL)
-				throw ("Не удалось выделить память");
-			for (int i = 0; i < a.cnt; i++)
-				c.ptr[i] = a.ptr[i] * b;
-			return c;
-		};
-		friend Vector<T> operator*(const T& b, const Vector<T>& a) {
-			return(a*b);
-		};
-		friend Vector<T> operator/(const Vector<T>& a, const Vector<T>& b) {
-			if (a.cnt != b.cnt)
-				throw("Операция невозможна");
-			for (int i = 0; i < b.cnt; i++)
-				if (b.ptr[i] == 0)
+			for (int i = 0; i < B.cnt; i++)
+				if (B.ptr[i] == 0)
 					throw("Деление на ноль невозможно");
-			Vector<T> c(a.cnt);
-			for (int i = 0; i < c.cnt; i++)
-				c.ptr[i] = a.ptr[i] / b.ptr[i];
-			return c;
+			Vector<T> C(A.cnt);
+			for (int i = 0; i < C.cnt; i++)
+				C.ptr[i] = A.ptr[i] / B.ptr[i];
+			return C;
 		};
-		friend Vector<T> operator/(const Vector<T>& a, const T& b) {
+		friend Vector<T> operator/(const Vector<T>& A, const T& b) {
 			if (b == 0)throw("Деление на ноль невозможно");
-			Vector<T> c;
-			c.cnt = a.cnt;
-			c.ptr = new T[c.cnt];
-			if (c.ptr == NULL)
-				throw ("Не удалось выделить память");
-			for (int i = 0; i < a.cnt; i++)
-				c.ptr[i] = a.ptr[i] / b;
-			return c;
+			Vector<T> C(A.cnt);
+			for (int i = 0; i < A.cnt; i++)
+				C.ptr[i] = A.ptr[i] / b;
+			return C;
 		};
 		friend ostream&operator<<(ostream& o, const Vector<T>& a) {
 			o << endl << "cnt=" << a.cnt << endl << "ptr:";
@@ -133,15 +112,15 @@ class Vector{
 		friend istream&operator>>(istream& o, Vector<T>& a) {
 			int tmp = 0;
 			while (tmp <= 0) {
-				cout << "Введите сnt:";
+				cout << "Введите количество элементов:";
 				o >> tmp;
-				if (tmp < 0)cout << "cnt должна быть больше нуля. Повторите ввод" << endl;
+				if (tmp <= 0)cout << "Количество элементов должно быть больше нуля. Повторите ввод" << endl;
 			}
-			a.cnt = tmp;
 			delete[] a.ptr;
 			a.ptr = new T[a.cnt];
 			if (a.ptr == NULL)
 				throw ("Не удалось выделить память");
+			a.cnt = tmp;
 			for (int i = 0; i < a.cnt; i++) {
 				cout << "ptr[" << i << "]=";
 				o >> a.ptr[i];
@@ -150,5 +129,4 @@ class Vector{
 			return o;
 		};
 };
-
 #endif
